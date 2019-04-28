@@ -9,11 +9,12 @@ const app = express()
 const port = 3001;
 
 let status = "STATS NOT ACQUIRED YET";
+getStatus();
 
 cron.schedule('* * * * *', async () => { // Get stats once a minute
     debug('GETTING NEW STATS');
     status = await getStatus()
-    debug('STATS UPDATED')
+    debug('STATS UPDATED');
 });
 
 
@@ -34,9 +35,10 @@ async function getStatus(){
     debug('Setting viewport');
     await page.setViewport({ width: 1280, height: 800 })
     debug('Navigating to the URL');
-    await page.goto('https://store.google.com/gb/config/uylj89x6oh');
-     debug('Waiting for idle network');
-     await page.waitForNavigation({ waitUntil: 'networkidle0' });
+    await page.goto('https://store.google.com/gb/config/uylj89x6oh', {
+        waitUntil: 'networkidle2',
+        timeout: 600000,
+    });
 
     debug('Evaluating for chalkText');
     let chalkText = await page.evaluate( ()=> {
