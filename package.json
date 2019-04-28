@@ -8,6 +8,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "express": "^4.16.4",
+    "helmet": "^3.16.0",
     "node-cron": "^2.0.3",
     "puppeteer": "^1.15.0"
   }

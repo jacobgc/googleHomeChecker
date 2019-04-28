@@ -4,6 +4,7 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const debug = require('debug')('googleHomeChecker');
 const cron = require('node-cron');
+var helmet = require('helmet')
 const app = express()
 const port = 3001;
 
@@ -16,6 +17,7 @@ cron.schedule('* * * * *', async () => { // Get stats once a minute
 });
 
 
+app.use(helmet())
 app.get('/', async (req, res) => {
     res.setHeader('Cache-Control', 'max-age=60');
     res.send(status);
