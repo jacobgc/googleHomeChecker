@@ -16,7 +16,10 @@ cron.schedule('* * * * *', async () => { // Get stats once a minute
 });
 
 
-app.get('/', async (req, res) => res.send(status))
+app.get('/', async (req, res) => {
+    res.setHeader('Cache-Control', 'max-age=60');
+    res.send(status);
+})
 
 app.listen(port, () => console.log(`googleHomeChecker running on port: ${port}!`))
 
