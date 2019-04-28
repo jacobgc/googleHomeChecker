@@ -1,0 +1,14 @@
+{
+  "name": "googleHomeChecker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jacob Gee-Clarke",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "node-cron": "^2.0.3",
+    "puppeteer": "^1.15.0"
+  }
+}
