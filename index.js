@@ -4,7 +4,9 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const debug = require('debug')('googleHomeChecker');
 const cron = require('node-cron');
-var helmet = require('helmet')
+const helmet = require('helmet');
+const moment = require('moment');
+
 const app = express()
 const port = 3001;
 
@@ -13,7 +15,7 @@ getStatus();
 
 cron.schedule('* * * * *', async () => { // Get stats once a minute
     debug('GETTING NEW STATS');
-    status = await getStatus()
+    await getStatus()
     debug('STATS UPDATED');
 });
 
@@ -57,7 +59,7 @@ async function getStatus(){
 
 
     debug('Returning output');
-    return JSON.parse(`{"chalkStatus":"${chalkText}", "charcoalStatus":"${charcoalText}"}`)
+    status = JSON.parse(`{"chalkStatus":"${chalkText}", "charcoalStatus":"${charcoalText}", "timeUpdated":"${moment().format('HH:mm:ss [UTC/ZULU]')}"}`);
     
     
 }
